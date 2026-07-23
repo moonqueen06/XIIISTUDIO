@@ -31,13 +31,13 @@ export const PortfolioGrid: React.FC<PortfolioGridProps> = ({ onSelectProject })
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div>
             <div className="flex items-center space-x-3 mb-3">
-              <div className="w-8 h-[2px] bg-[#800020]" />
-              <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-[#800020] font-bold">
+              <div className="w-8 h-[2px] bg-[#C8102E]" />
+              <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-[#C8102E] font-bold">
                 04 / Gallery Showcase
               </span>
             </div>
             <h2 className="text-4xl sm:text-6xl font-syne font-black text-white tracking-tighter uppercase leading-none">
-              Selected Works<span className="text-[#800020]">.</span>
+              Selected Works<span className="text-[#C8102E]">.</span>
             </h2>
           </div>
 
@@ -54,7 +54,7 @@ export const PortfolioGrid: React.FC<PortfolioGridProps> = ({ onSelectProject })
               onClick={() => setActiveCategory(cat.id)}
               className={`px-4 py-2 text-[10px] font-mono uppercase tracking-[0.2em] whitespace-nowrap transition-all ${
                 activeCategory === cat.id
-                  ? 'bg-[#800020] text-white font-bold shadow-lg'
+                  ? 'bg-[#C8102E] text-white font-bold shadow-lg'
                   : 'bg-[#0a0a0a] text-white/60 hover:text-white border border-white/10'
               }`}
             >
@@ -65,12 +65,12 @@ export const PortfolioGrid: React.FC<PortfolioGridProps> = ({ onSelectProject })
 
         {/* Coming Soon Section - No Images / Screenshots */}
         <div className="bg-[#0a0a0a] border border-white/10 p-8 sm:p-16 text-center space-y-6 relative overflow-hidden shadow-2xl">
-          <div className="inline-flex items-center space-x-2 bg-[#800020] text-white px-4 py-1.5 text-[10px] font-mono font-bold uppercase tracking-[0.25em]">
+          <div className="inline-flex items-center space-x-2 bg-[#C8102E] text-white px-4 py-1.5 text-[10px] font-mono font-bold uppercase tracking-[0.25em]">
             <span>Archive Updating</span>
           </div>
 
           <h3 className="text-4xl sm:text-7xl font-syne font-black text-white uppercase tracking-tighter leading-none">
-            COMING SOON<span className="text-[#800020]">!</span>
+            COMING SOON<span className="text-[#C8102E]">!</span>
           </h3>
 
           <p className="text-white/70 text-xs sm:text-sm font-mono uppercase tracking-widest max-w-xl mx-auto leading-relaxed">
@@ -80,7 +80,7 @@ export const PortfolioGrid: React.FC<PortfolioGridProps> = ({ onSelectProject })
           <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="#contact"
-              className="bg-[#800020] hover:bg-[#a00028] text-white px-8 py-4 text-[10px] font-mono uppercase tracking-[0.25em] font-bold transition-all shadow-xl flex items-center space-x-2"
+              className="bg-[#C8102E] hover:bg-[#d91635] text-white px-8 py-4 text-xs font-syne uppercase tracking-wider font-bold transition-all shadow-xl flex items-center space-x-2"
             >
               <span>Request Private Portfolio Deck</span>
               <ArrowRight size={14} />
@@ -98,17 +98,17 @@ export const PortfolioGrid: React.FC<PortfolioGridProps> = ({ onSelectProject })
             {/* Close Button */}
             <button
               onClick={() => setLightboxItem(null)}
-              className="absolute top-4 right-4 p-2.5 bg-white/10 hover:bg-[#800020] text-white transition-colors"
+              className="absolute top-4 right-4 p-2.5 bg-white/10 hover:bg-[#C8102E] text-white transition-colors"
             >
               <X size={18} />
             </button>
 
             {/* Header Info */}
             <div className="space-y-2 mb-6 border-b border-white/10 pb-4">
-              <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-[#800020] font-bold">
+              <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-[#C8102E] font-bold">
                 {lightboxItem.categoryLabel} • {lightboxItem.year}
               </span>
-              <h3 className="text-3xl sm:text-4xl font-syne font-bold text-white uppercase">
+              <h3 className="text-3xl sm:text-4xl font-syne font-black text-white uppercase">
                 {lightboxItem.title}
               </h3>
               <p className="text-xs font-mono text-white/50 uppercase tracking-widest">
@@ -127,7 +127,7 @@ export const PortfolioGrid: React.FC<PortfolioGridProps> = ({ onSelectProject })
             </div>
 
             {/* Summary */}
-            <p className="text-base font-serif text-white/90 leading-relaxed mb-6 italic border-l-2 border-[#800020] pl-4 py-1">
+            <p className="text-base font-serif text-white/90 leading-relaxed mb-6 italic border-l-2 border-[#C8102E] pl-4 py-1">
               "{lightboxItem.summary}"
             </p>
 
@@ -135,7 +135,7 @@ export const PortfolioGrid: React.FC<PortfolioGridProps> = ({ onSelectProject })
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-white/10 mb-8 font-mono">
               {lightboxItem.challenge && (
                 <div className="space-y-2">
-                  <h4 className="text-[10px] uppercase tracking-[0.25em] text-[#800020] font-bold">
+                  <h4 className="text-[10px] uppercase tracking-[0.25em] text-[#C8102E] font-bold">
                     The Challenge
                   </h4>
                   <p className="text-xs text-white/80 leading-relaxed font-sans">
@@ -157,8 +157,8 @@ export const PortfolioGrid: React.FC<PortfolioGridProps> = ({ onSelectProject })
             </div>
 
             {lightboxItem.impact && (
-              <div className="p-4 bg-[#800020]/20 border border-[#800020]/40 mb-8 flex items-start space-x-3 font-mono">
-                <CheckCircle2 size={16} className="text-[#800020] shrink-0 mt-0.5" />
+              <div className="p-4 bg-[#C8102E]/20 border border-[#C8102E]/40 mb-8 flex items-start space-x-3 font-mono">
+                <CheckCircle2 size={16} className="text-[#C8102E] shrink-0 mt-0.5" />
                 <div>
                   <p className="text-[10px] font-bold text-white uppercase tracking-wider">Key Result & Impact</p>
                   <p className="text-xs text-white/80 font-sans mt-0.5">{lightboxItem.impact}</p>
@@ -173,7 +173,7 @@ export const PortfolioGrid: React.FC<PortfolioGridProps> = ({ onSelectProject })
                   onSelectProject(lightboxItem);
                   setLightboxItem(null);
                 }}
-                className="bg-[#800020] hover:bg-[#a00028] text-white px-6 py-3.5 text-[10px] font-mono uppercase tracking-[0.2em] font-bold transition-all flex items-center space-x-2 shadow-xl"
+                className="bg-[#C8102E] hover:bg-[#d91635] text-white px-6 py-3.5 text-xs font-syne uppercase tracking-wider font-bold transition-all flex items-center space-x-2 shadow-xl"
               >
                 <span>Request Similar Project</span>
                 <ArrowRight size={14} />

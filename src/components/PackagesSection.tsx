@@ -34,13 +34,13 @@ export const PackagesSection: React.FC<PackagesSectionProps> = ({ onSelectPackag
         {/* Section Header */}
         <div className="max-w-3xl mb-16">
           <div className="flex items-center space-x-3 mb-3">
-            <div className="w-8 h-[2px] bg-[#800020]" />
-            <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-[#800020] font-bold">
+            <div className="w-8 h-[2px] bg-[#C8102E]" />
+            <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-[#C8102E] font-bold">
               05 / Engagement Models
             </span>
           </div>
           <h2 className="text-4xl sm:text-6xl font-syne font-black text-white tracking-tighter uppercase leading-none">
-            Tailored Studio Packages<span className="text-[#800020]">.</span>
+            Tailored Studio Packages<span className="text-[#C8102E]">.</span>
           </h2>
           <p className="text-white/70 text-xs font-mono uppercase tracking-widest mt-4 max-w-xl">
             Choose the model that fits your stage of growth—from ground-up buildouts to ongoing growth partnerships.
@@ -54,14 +54,14 @@ export const PackagesSection: React.FC<PackagesSectionProps> = ({ onSelectPackag
               key={pkg.id}
               className={`p-8 flex flex-col justify-between transition-all duration-300 relative border ${
                 pkg.highlight
-                  ? 'bg-[#800020] text-white border-white/20 shadow-2xl scale-[1.02]'
+                  ? 'bg-[#C8102E] text-white border-white/20 shadow-2xl scale-[1.02]'
                   : 'bg-[#050505] text-white border-white/10 hover:border-white/30 shadow-2xl'
               }`}
             >
               {/* Highlight Badge */}
               {pkg.highlight && (
                 <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-black text-white border border-white/20 px-4 py-1 text-[9px] font-mono font-bold uppercase tracking-[0.25em] shadow-md flex items-center space-x-1">
-                  <Sparkles size={12} className="text-[#f5a6b0]" />
+                  <Sparkles size={12} className="text-[#ff8093]" />
                   <span>Flagship Growth Model</span>
                 </div>
               )}
@@ -70,12 +70,12 @@ export const PackagesSection: React.FC<PackagesSectionProps> = ({ onSelectPackag
                 {/* Header */}
                 <div className="mb-6 border-b border-white/10 pb-4">
                   <span className={`text-[9px] font-mono uppercase tracking-[0.25em] font-bold px-2.5 py-1 inline-block mb-3 ${
-                    pkg.highlight ? 'bg-black text-[#f5a6b0]' : 'bg-[#800020] text-white'
+                    pkg.highlight ? 'bg-black text-[#ff8093]' : 'bg-[#C8102E] text-white'
                   }`}>
                     {pkg.badge}
                   </span>
                   
-                  <h3 className="text-2xl font-syne font-bold uppercase text-white">
+                  <h3 className="text-2xl font-syne font-black uppercase text-white">
                     {pkg.title}
                   </h3>
 
@@ -105,7 +105,7 @@ export const PackagesSection: React.FC<PackagesSectionProps> = ({ onSelectPackag
                   </p>
                   {pkg.deliverables.map((item, idx) => (
                     <div key={idx} className="flex items-start space-x-2.5 text-[11px] text-white/90">
-                      <Check size={14} className={`shrink-0 mt-0.5 ${pkg.highlight ? 'text-[#f5a6b0]' : 'text-[#800020]'}`} />
+                      <Check size={14} className={`shrink-0 mt-0.5 ${pkg.highlight ? 'text-[#ff8093]' : 'text-[#C8102E]'}`} />
                       <span>{item}</span>
                     </div>
                   ))}
@@ -116,10 +116,10 @@ export const PackagesSection: React.FC<PackagesSectionProps> = ({ onSelectPackag
               <div className="pt-8">
                 <button
                   onClick={() => onSelectPackage(pkg.title)}
-                  className={`w-full py-3.5 px-4 text-[10px] font-mono uppercase tracking-[0.2em] font-bold transition-all flex items-center justify-center space-x-2 ${
+                  className={`w-full py-3.5 px-4 text-xs font-syne uppercase tracking-wider font-bold transition-all flex items-center justify-center space-x-2 ${
                     pkg.highlight
-                      ? 'bg-white text-[#800020] hover:bg-black hover:text-white shadow-xl'
-                      : 'bg-[#800020] hover:bg-[#a00028] text-white'
+                      ? 'bg-white text-[#C8102E] hover:bg-black hover:text-white shadow-xl'
+                      : 'bg-[#C8102E] hover:bg-[#d91635] text-white'
                   }`}
                 >
                   <span>{pkg.ctaText}</span>
@@ -134,7 +134,7 @@ export const PackagesSection: React.FC<PackagesSectionProps> = ({ onSelectPackag
         {/* INTERACTIVE ESTIMATOR BOX */}
         <div className="bg-[#050505] p-8 border border-white/10 shadow-2xl">
           <div className="flex items-center space-x-3 mb-6 border-b border-white/10 pb-4">
-            <div className="w-10 h-10 bg-[#800020] text-white flex items-center justify-center font-bold">
+            <div className="w-10 h-10 bg-[#C8102E] text-white flex items-center justify-center font-bold">
               <Calculator size={20} />
             </div>
             <div>
@@ -152,12 +152,12 @@ export const PackagesSection: React.FC<PackagesSectionProps> = ({ onSelectPackag
                   onClick={() => toggleAddon(addon.id)}
                   className={`p-4 text-left border text-xs font-mono transition-all flex flex-col justify-between ${
                     active
-                      ? 'bg-[#800020] text-white border-[#800020] shadow-xl'
+                      ? 'bg-[#C8102E] text-white border-[#C8102E] shadow-xl'
                       : 'bg-[#0a0a0a] text-white/80 border-white/10 hover:border-white/30'
                   }`}
                 >
                   <span className="font-mono text-xs font-bold mb-2">{addon.label}</span>
-                  <span className={active ? 'text-[#f5a6b0] font-bold' : 'text-[#800020] font-bold'}>
+                  <span className={active ? 'text-[#ff8093] font-bold' : 'text-[#C8102E] font-bold'}>
                     +${addon.price.toLocaleString()}
                   </span>
                 </button>
@@ -168,7 +168,7 @@ export const PackagesSection: React.FC<PackagesSectionProps> = ({ onSelectPackag
           <div className="flex flex-col sm:flex-row items-center justify-between pt-4 border-t border-white/10 gap-4 font-mono">
             <div>
               <span className="text-[10px] text-white/50 uppercase tracking-widest block">Estimated Scope Total:</span>
-              <span className="text-3xl font-syne font-bold text-[#800020]">
+              <span className="text-3xl font-syne font-bold text-[#C8102E]">
                 ${calculatedTotal > 0 ? calculatedTotal.toLocaleString() : '0 (Select modules)'}
               </span>
             </div>
@@ -176,7 +176,7 @@ export const PackagesSection: React.FC<PackagesSectionProps> = ({ onSelectPackag
             {calculatedTotal > 0 && (
               <button
                 onClick={() => onSelectPackage(`Custom Estimate: $${calculatedTotal.toLocaleString()}`)}
-                className="bg-[#800020] hover:bg-[#a00028] text-white px-6 py-3.5 text-[10px] font-mono uppercase tracking-[0.2em] font-bold transition-all shadow-xl"
+                className="bg-[#C8102E] hover:bg-[#d91635] text-white px-6 py-3.5 text-xs font-syne uppercase tracking-wider font-bold transition-all shadow-xl"
               >
                 Inquire with This Scope
               </button>

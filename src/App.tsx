@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { ChallengeSolution } from './components/ChallengeSolution';
@@ -9,32 +9,14 @@ import { PackagesSection } from './components/PackagesSection';
 import { PricingTable } from './components/PricingTable';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
-import { AdminInboxModal } from './components/AdminInboxModal';
-import { DeployExportModal } from './components/DeployExportModal';
 import { MobileCinematicView } from './components/MobileCinematicView';
 import { PortfolioItem } from './types';
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('hero');
-  const [inboxOpen, setInboxOpen] = useState(false);
-  const [deployModalOpen, setDeployModalOpen] = useState(false);
   const [prefilledScope, setPrefilledScope] = useState('');
   const [isSoundEnabled, setIsSoundEnabled] = useState(true);
   const [isMobileCinematic, setIsMobileCinematic] = useState(false);
-  const [inboxCount, setInboxCount] = useState(1);
-
-  // Fetch initial inbox count
-  useEffect(() => {
-    fetch('/api/contact')
-      .then((res) => res.json())
-      .then((json) => {
-        if (json.data) setInboxCount(json.data.length);
-      })
-      .catch(() => {
-        const raw = localStorage.getItem('xiii_contacts');
-        if (raw) setInboxCount(JSON.parse(raw).length);
-      });
-  }, []);
 
   const handleNavigate = (sectionId: string) => {
     setActiveSection(sectionId);
@@ -55,14 +37,11 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-black font-sans selection:bg-[#800020] selection:text-white">
+    <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-[#800020] selection:text-white">
       {/* Sticky Header */}
       <Header
         activeSection={activeSection}
         onNavigate={handleNavigate}
-        inboxCount={inboxCount}
-        onOpenInbox={() => setInboxOpen(true)}
-        onOpenDeployModal={() => setDeployModalOpen(true)}
         isSoundEnabled={isSoundEnabled}
         onToggleSound={() => setIsSoundEnabled(!isSoundEnabled)}
         isMobileCinematic={isMobileCinematic}
@@ -116,7 +95,6 @@ export default function App() {
           {/* Integrated Contact Form */}
           <ContactSection
             prefilledScope={prefilledScope}
-            onInquirySubmitted={() => setInboxCount((prev) => prev + 1)}
           />
         </main>
       )}
@@ -124,20 +102,8 @@ export default function App() {
       {/* Footer */}
       <Footer
         onNavigate={handleNavigate}
-        onOpenDeployModal={() => setDeployModalOpen(true)}
-      />
-
-      {/* Studio Admin Inbox Drawer */}
-      <AdminInboxModal
-        isOpen={inboxOpen}
-        onClose={() => setInboxOpen(false)}
-      />
-
-      {/* Deploy to Vercel/Netlify Instructions Modal */}
-      <DeployExportModal
-        isOpen={deployModalOpen}
-        onClose={() => setDeployModalOpen(false)}
       />
     </div>
   );
 }
+

@@ -36,8 +36,8 @@ export const MobileCinematicView: React.FC<MobileCinematicViewProps> = ({
       {/* Top Header */}
       <div className="p-4 flex items-center justify-between border-b border-white/10 bg-black/80 backdrop-blur-md z-20">
         <div className="flex items-center space-x-2">
-          <span className="font-serif font-black text-2xl text-white tracking-tighter">XIII</span>
-          <span className="text-[10px] font-mono text-[#f5a6b0] uppercase tracking-widest bg-[#800020] px-2 py-0.5 rounded">
+          <span className="font-syne font-black text-2xl text-white tracking-tighter">XIII</span>
+          <span className="text-[10px] font-mono text-[#ff8093] uppercase tracking-widest bg-[#C8102E] px-2 py-0.5 rounded">
             Cinematic Mobile Gallery
           </span>
         </div>
@@ -54,7 +54,7 @@ export const MobileCinematicView: React.FC<MobileCinematicViewProps> = ({
       <div className="relative flex-1 flex items-center justify-center p-4">
         
         {/* Background Ambient Glow */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#800020]/30 via-black to-black pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#C8102E]/30 via-black to-black pointer-events-none" />
 
         <div className="relative w-full max-w-sm h-[75vh] max-h-[580px] rounded-3xl overflow-hidden border border-white/20 shadow-2xl bg-stone-900 flex flex-col justify-between group">
           
@@ -73,7 +73,7 @@ export const MobileCinematicView: React.FC<MobileCinematicViewProps> = ({
               {currentIndex + 1} / {PORTFOLIO_ITEMS.length}
             </div>
 
-            <div className="absolute top-4 right-4 bg-[#800020] px-3 py-1 rounded-full text-[10px] font-mono text-white font-bold uppercase tracking-wider shadow">
+            <div className="absolute top-4 right-4 bg-[#C8102E] px-3 py-1 rounded-full text-[10px] font-mono text-white font-bold uppercase tracking-wider shadow">
               {currentItem.categoryLabel}
             </div>
           </div>
@@ -84,7 +84,7 @@ export const MobileCinematicView: React.FC<MobileCinematicViewProps> = ({
               <p className="text-[10px] font-mono uppercase tracking-widest text-white/50">
                 {currentItem.client} • {currentItem.year}
               </p>
-              <h3 className="text-2xl font-serif font-bold text-white leading-tight">
+              <h3 className="text-2xl font-syne font-black uppercase text-white leading-tight">
                 {currentItem.title}
               </h3>
               <p className="text-xs text-white/70 line-clamp-2 font-sans mt-1.5 leading-relaxed">
@@ -95,7 +95,7 @@ export const MobileCinematicView: React.FC<MobileCinematicViewProps> = ({
             <div className="flex items-center justify-between pt-2">
               <button
                 onClick={() => setDetailOpen(true)}
-                className="text-xs font-mono text-[#f5a6b0] uppercase font-bold flex items-center space-x-1 hover:underline"
+                className="text-xs font-mono text-[#ff8093] uppercase font-bold flex items-center space-x-1 hover:underline"
               >
                 <Eye size={14} />
                 <span>View Details</span>
@@ -106,7 +106,7 @@ export const MobileCinematicView: React.FC<MobileCinematicViewProps> = ({
                   onSelectProjectForContact(currentItem.title);
                   onExitCinematic();
                 }}
-                className="bg-[#800020] hover:bg-[#6b0f1a] text-white px-4 py-2 rounded-full text-[10px] font-mono uppercase font-bold tracking-wider flex items-center space-x-1"
+                className="bg-[#C8102E] hover:bg-[#d91635] text-white px-4 py-2 rounded-full text-[10px] font-mono uppercase font-bold tracking-wider flex items-center space-x-1"
               >
                 <span>Inquire</span>
                 <ArrowUpRight size={12} />
@@ -137,7 +137,7 @@ export const MobileCinematicView: React.FC<MobileCinematicViewProps> = ({
       <div className="p-4 bg-black border-t border-white/10 flex items-center justify-between text-xs font-mono text-white/70">
         <button
           onClick={onExitCinematic}
-          className="text-white hover:text-[#f5a6b0] uppercase font-bold"
+          className="text-white hover:text-[#ff8093] uppercase font-bold"
         >
           ← Exit to Standard Scroll
         </button>
@@ -151,7 +151,7 @@ export const MobileCinematicView: React.FC<MobileCinematicViewProps> = ({
                 setCurrentIndex(idx);
               }}
               className={`h-1.5 rounded-full cursor-pointer transition-all ${
-                idx === currentIndex ? 'w-6 bg-[#800020]' : 'w-1.5 bg-white/20'
+                idx === currentIndex ? 'w-6 bg-[#C8102E]' : 'w-1.5 bg-white/20'
               }`}
             />
           ))}
@@ -163,7 +163,7 @@ export const MobileCinematicView: React.FC<MobileCinematicViewProps> = ({
         <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl p-6 overflow-y-auto flex flex-col justify-between animate-in slide-in-from-bottom duration-200">
           <div className="space-y-4">
             <div className="flex items-center justify-between border-b border-white/10 pb-4">
-              <span className="text-xs font-mono text-[#f5a6b0] uppercase font-bold">
+              <span className="text-xs font-mono text-[#ff8093] uppercase font-bold">
                 {currentItem.categoryLabel}
               </span>
               <button
@@ -174,7 +174,7 @@ export const MobileCinematicView: React.FC<MobileCinematicViewProps> = ({
               </button>
             </div>
 
-            <h2 className="text-3xl font-serif font-bold text-white">{currentItem.title}</h2>
+            <h2 className="text-3xl font-syne font-black uppercase text-white">{currentItem.title}</h2>
             <p className="text-xs font-mono text-white/60">Client: {currentItem.client}</p>
 
             <img
@@ -188,7 +188,7 @@ export const MobileCinematicView: React.FC<MobileCinematicViewProps> = ({
 
             {currentItem.challenge && (
               <div className="space-y-1 text-xs">
-                <p className="font-mono text-[#f5a6b0] uppercase font-bold">Challenge</p>
+                <p className="font-mono text-[#ff8093] uppercase font-bold">Challenge</p>
                 <p className="text-white/80 font-sans">{currentItem.challenge}</p>
               </div>
             )}
@@ -208,7 +208,7 @@ export const MobileCinematicView: React.FC<MobileCinematicViewProps> = ({
                 onSelectProjectForContact(currentItem.title);
                 onExitCinematic();
               }}
-              className="w-full bg-[#800020] text-white py-3.5 rounded-xl text-xs uppercase font-mono font-bold tracking-widest text-center"
+              className="w-full bg-[#C8102E] text-white py-3.5 rounded-xl text-xs uppercase font-syne font-bold tracking-wider text-center"
             >
               Request Project Like This
             </button>

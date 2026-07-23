@@ -11,19 +11,19 @@ export const AboutFernanda: React.FC = () => {
           {/* LEFT: Credentials & Key Focus (Text-driven block) */}
           <div className="lg:col-span-5 space-y-6">
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-[2px] bg-[#800020]" />
-              <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-[#800020] font-bold">
+              <div className="w-8 h-[2px] bg-[#C8102E]" />
+              <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-[#C8102E] font-bold">
                 02 / Studio Founder & Lead
               </span>
             </div>
 
             <div className="bg-[#0a0a0a] border border-white/10 p-8 space-y-6 shadow-2xl">
               <div className="border-b border-white/10 pb-4">
-                <p className="text-[9px] font-mono text-[#f5a6b0] uppercase tracking-[0.25em]">
+                <p className="text-[9px] font-mono text-[#ff8093] uppercase tracking-[0.25em]">
                   Studio Lead Profile
                 </p>
                 <p className="font-syne text-3xl font-black uppercase text-white tracking-tight mt-1">
-                  Fernanda<span className="text-[#800020]">.</span>
+                  Fernanda<span className="text-[#C8102E]">.</span>
                 </p>
                 <p className="text-xs font-serif italic text-white/70 mt-1">
                   Multidisciplinary Artist & Digital Strategist
@@ -33,15 +33,15 @@ export const AboutFernanda: React.FC = () => {
               {/* Quick Badges */}
               <div className="space-y-4 font-mono">
                 <div className="bg-[#050505] border border-white/10 p-4 flex items-start space-x-3">
-                  <MapPin size={18} className="text-[#800020] shrink-0 mt-0.5" />
+                  <MapPin size={18} className="text-[#C8102E] shrink-0 mt-0.5" />
                   <div>
-                    <p className="text-[10px] uppercase font-bold text-white tracking-wider">Costa Rica Roots</p>
-                    <p className="text-[9px] text-white/50 uppercase tracking-widest mt-0.5">Global Operational Perspective</p>
+                    <p className="text-[10px] uppercase font-bold text-white tracking-wider">Based in Bocas del Toro</p>
+                    <p className="text-[9px] text-[#ff8093] uppercase tracking-widest mt-0.5 font-bold">Moving Worldwide</p>
                   </div>
                 </div>
 
                 <div className="bg-[#050505] border border-white/10 p-4 flex items-start space-x-3">
-                  <GraduationCap size={18} className="text-[#800020] shrink-0 mt-0.5" />
+                  <GraduationCap size={18} className="text-[#C8102E] shrink-0 mt-0.5" />
                   <div>
                     <p className="text-[10px] uppercase font-bold text-white tracking-wider">UWC Maastricht & Ringling</p>
                     <p className="text-[9px] text-white/50 uppercase tracking-widest mt-0.5">Visual Studies & Fine Arts</p>
@@ -49,8 +49,8 @@ export const AboutFernanda: React.FC = () => {
                 </div>
               </div>
 
-              <div className="p-4 bg-[#800020]/20 border border-[#800020] text-xs font-mono text-white/80 space-y-1">
-                <p className="text-[9px] uppercase tracking-[0.2em] text-[#f5a6b0] font-bold">Specialized Operational Field</p>
+              <div className="p-4 bg-[#C8102E]/20 border border-[#C8102E] text-xs font-mono text-white/90 space-y-1">
+                <p className="text-[9px] uppercase tracking-[0.2em] text-[#ff8093] font-bold">Specialized Operational Field</p>
                 <p className="text-xs">Tourism, Hospitality, Real Estate & E-Commerce Systems</p>
               </div>
             </div>
@@ -60,36 +60,36 @@ export const AboutFernanda: React.FC = () => {
           <div className="lg:col-span-7 space-y-8">
             <div>
               <h2 className="text-4xl sm:text-6xl font-syne font-black text-white tracking-tighter uppercase leading-tight">
-                Hi, I’m Fernanda<span className="text-[#800020]">.</span>
+                Hi, I’m Fernanda<span className="text-[#C8102E]">.</span>
               </h2>
 
-              <p className="text-xl sm:text-2xl font-serif text-[#f5a6b0] italic font-light mt-2">
-                Merging artistic vision with structured operational workflows.
+              <p className="text-xl sm:text-2xl font-serif text-[#ff8093] italic font-light mt-2">
+                "My studio is wherever you are."
               </p>
             </div>
 
-            <div className="space-y-4 text-white/80 font-sans text-sm sm:text-base leading-relaxed border-l-2 border-[#800020] pl-6 py-2">
+            <div className="space-y-4 text-white/80 font-sans text-sm sm:text-base leading-relaxed border-l-2 border-[#C8102E] pl-6 py-2">
               <p>
-                Originally from Costa Rica, my journey has always been a mix of fine art and structured problem-solving. My formal introduction to the arts started with an IB at <strong className="text-white">UWC Maastricht</strong> in the Netherlands, followed by time at <strong className="text-white">Ringling College of Art and Design</strong> majoring in Visual Studies.
+                Based in <strong className="text-white">Bocas del Toro</strong> and moving worldwide, my journey is a fusion of fine art and structured operational strategy. My formal introduction to the arts started with an IB at <strong className="text-white">UWC Maastricht</strong> in the Netherlands, followed by visual studies at <strong className="text-white">Ringling College of Art and Design</strong>.
               </p>
 
               <p>
-                While I have a deep love for fine arts, photography, and digital illustration, I quickly realized my passion was applying creative thinking to real-world business challenges.
+                While I have a deep love for fine arts, photography, and digital direction, my mission is applying creative clarity to real-world business growth.
               </p>
 
               <p>
-                I paired my artistic foundation with practical tech experience, mastering web design, marketing, and systems creation. With my background running daily operations and customer service in the busy tourism sector, <strong className="text-white underline decoration-[#800020] underline-offset-4">I don’t just design beautiful brands—I know exactly how to build the backend workflows to make them run efficiently.</strong>
+                I pair artistic foundation with tech systems—mastering web engineering, marketing architecture, and CRM creation. <strong className="text-white underline decoration-[#C8102E] underline-offset-4">I don’t just design beautiful brands—I build the backend workflows to make them operate effortlessly anywhere on earth.</strong>
               </p>
             </div>
 
             {/* Highlights Bar */}
             <div className="pt-6 border-t border-white/10 grid grid-cols-1 sm:grid-cols-2 gap-6 font-mono">
               <div className="space-y-1 bg-[#0a0a0a] p-4 border border-white/10">
-                <p className="text-[9px] uppercase tracking-[0.25em] text-[#800020] font-bold">Core Fine Arts</p>
+                <p className="text-[9px] uppercase tracking-[0.25em] text-[#C8102E] font-bold">Core Fine Arts</p>
                 <p className="text-xs font-semibold text-white">Photography, Visual Direction & Brand Systems</p>
               </div>
               <div className="space-y-1 bg-[#0a0a0a] p-4 border border-white/10">
-                <p className="text-[9px] uppercase tracking-[0.25em] text-[#800020] font-bold">Core Systems</p>
+                <p className="text-[9px] uppercase tracking-[0.25em] text-[#C8102E] font-bold">Core Systems</p>
                 <p className="text-xs font-semibold text-white">Web Engineering, CRM & Operational Workflows</p>
               </div>
             </div>

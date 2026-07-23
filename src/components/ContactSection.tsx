@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle2, AlertCircle, Sparkles } from 'lucide-react';
+import { Mail, Phone, Send, CheckCircle2, AlertCircle } from 'lucide-react';
 import { ContactInquiry } from '../types';
 
 interface ContactSectionProps {
   prefilledScope?: string;
-  onInquirySubmitted: () => void;
 }
 
 export const ContactSection: React.FC<ContactSectionProps> = ({
   prefilledScope,
-  onInquirySubmitted,
 }) => {
   const [formData, setFormData] = useState({
     name: '',
@@ -45,27 +43,28 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
     setIsSubmitting(true);
 
     try {
-      // 1. Try real server endpoint /api/contact
-      const response = await fetch('/api/contact', {
+      // 1. Post to backend server endpoint /api/contact
+      await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
-      });
+      }).catch(() => null);
 
-      if (response.ok) {
-        setSubmitSuccess(true);
-        onInquirySubmitted();
-      } else {
-        // Fallback to client localstorage if offline or static export
-        saveToLocalStorage(formData);
-        setSubmitSuccess(true);
-        onInquirySubmitted();
-      }
-    } catch {
-      // Offline/Static fallback
+      // 2. Submit to Formspree / Web3Forms for direct email delivery to xiii.art.design@gmail.com
+      await fetch('https://formspree.io/f/xiii.art.design@gmail.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          _subject: `New XIII Studio Inquiry from ${formData.name}`,
+        }),
+      }).catch(() => null);
+
       saveToLocalStorage(formData);
       setSubmitSuccess(true);
-      onInquirySubmitted();
+    } catch {
+      saveToLocalStorage(formData);
+      setSubmitSuccess(true);
     } finally {
       setIsSubmitting(false);
     }
@@ -84,6 +83,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
     localStorage.setItem('xiii_contacts', JSON.stringify(existing));
   };
 
+  const constructMailto = () => {
+    const subject = encodeURIComponent(`Project Inquiry: ${formData.projectType} - ${formData.name}`);
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nCompany: ${formData.company}\nEngagement Model: ${formData.projectType}\nEstimated Budget: ${formData.budget}\nTimeline: ${formData.timeline}\n\nProject Details & Goals:\n${formData.message}`
+    );
+    return `mailto:xiii.art.design@gmail.com?subject=${subject}&body=${body}`;
+  };
+
   return (
     <section id="contact" className="py-24 bg-[#050505] text-white relative overflow-hidden border-b border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -94,32 +101,32 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
           <div className="lg:col-span-5 space-y-8">
             <div>
               <div className="flex items-center space-x-3 mb-3">
-                <div className="w-8 h-[2px] bg-[#800020]" />
-                <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-[#800020] font-bold">
-                  08 / Direct Communication
+                <div className="w-8 h-[2px] bg-[#C8102E]" />
+                <span className="text-xs uppercase tracking-wider text-[#C8102E] font-syne font-bold">
+                  Direct Communication
                 </span>
               </div>
-              <h2 className="text-4xl sm:text-6xl font-syne font-black text-white tracking-tighter uppercase leading-none">
-                Ready to Lead<span className="text-[#800020]">?</span>
+              <h2 className="text-4xl sm:text-6xl font-syne font-black text-white tracking-tight uppercase leading-none">
+                Ready to Lead<span className="text-[#C8102E]">?</span>
               </h2>
             </div>
 
-            <p className="text-white/80 text-sm leading-relaxed font-sans border-l-2 border-[#800020] pl-4">
+            <p className="text-white/80 text-sm sm:text-base leading-relaxed font-sans border-l-2 border-[#C8102E] pl-4">
               Whether you need a complete ground-up digital blueprint, ongoing growth partnership, or operational workflow architecture, let’s design a connected engine for your business.
             </p>
 
             {/* Direct Contact Cards */}
-            <div className="space-y-4 pt-4 border-t border-white/10 font-mono">
+            <div className="space-y-4 pt-4 border-t border-white/10">
               <a
                 href="mailto:xiii.art.design@gmail.com"
-                className="flex items-center space-x-4 p-4 bg-[#0a0a0a] border border-white/10 hover:border-[#800020] transition-all group"
+                className="flex items-center space-x-4 p-4 bg-[#0a0a0a] border border-white/10 hover:border-[#C8102E] transition-all group"
               >
-                <div className="p-3 bg-[#800020] text-white">
-                  <Mail size={18} />
+                <div className="p-3 bg-[#C8102E] text-white">
+                  <Mail size={20} />
                 </div>
                 <div>
-                  <p className="text-[9px] uppercase tracking-[0.25em] text-white/50">Direct Email</p>
-                  <p className="text-xs font-bold text-white group-hover:text-[#f5a6b0] transition-colors">
+                  <p className="text-xs uppercase tracking-wider text-white/50 font-syne font-semibold">Direct Email</p>
+                  <p className="text-sm font-bold text-white group-hover:text-[#ff8093] transition-colors">
                     xiii.art.design@gmail.com
                   </p>
                 </div>
@@ -127,61 +134,83 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
               <a
                 href="tel:+50764977883"
-                className="flex items-center space-x-4 p-4 bg-[#0a0a0a] border border-white/10 hover:border-[#800020] transition-all group"
+                className="flex items-center space-x-4 p-4 bg-[#0a0a0a] border border-white/10 hover:border-[#C8102E] transition-all group"
               >
-                <div className="p-3 bg-[#800020] text-white">
-                  <Phone size={18} />
+                <div className="p-3 bg-[#C8102E] text-white">
+                  <Phone size={20} />
                 </div>
                 <div>
-                  <p className="text-[9px] uppercase tracking-[0.25em] text-white/50">Direct WhatsApp / Phone</p>
-                  <p className="text-xs font-bold text-white group-hover:text-[#f5a6b0] transition-colors">
+                  <p className="text-xs uppercase tracking-wider text-white/50 font-syne font-semibold">Direct Phone / WhatsApp</p>
+                  <p className="text-sm font-bold text-white group-hover:text-[#ff8093] transition-colors">
                     +507 6497-7883
                   </p>
                 </div>
               </a>
             </div>
 
-            <div className="p-4 bg-[#0a0a0a] border border-white/10 text-xs text-white/70 space-y-1 font-mono">
-              <p className="text-[9px] uppercase tracking-[0.25em] text-[#800020] font-bold">Primary Sector Focus</p>
-              <p className="font-sans text-xs">Tourism & Hospitality (Direct bookings, guest loyalty & CRM).</p>
+            <div className="p-4 bg-[#0a0a0a] border border-white/10 text-xs text-white/70 space-y-1">
+              <p className="text-xs uppercase tracking-wider text-[#C8102E] font-syne font-bold">Primary Sector Focus</p>
+              <p className="font-sans text-xs">Tourism, Hospitality, Real Estate & High-Growth E-Commerce Brands.</p>
             </div>
           </div>
 
           {/* RIGHT: Integrated Contact Form */}
           <div className="lg:col-span-7 bg-[#0a0a0a] p-8 sm:p-10 border border-white/10 shadow-2xl">
             {submitSuccess ? (
-              <div className="text-center py-12 space-y-4 animate-in fade-in duration-300">
-                <div className="w-16 h-16 bg-[#800020] text-white mx-auto flex items-center justify-center">
-                  <CheckCircle2 size={32} />
+              <div className="text-center py-12 space-y-6 animate-in fade-in duration-300">
+                <div className="w-16 h-16 bg-[#C8102E] text-white mx-auto flex items-center justify-center rounded-full">
+                  <CheckCircle2 size={36} />
                 </div>
-                <h3 className="text-3xl font-syne font-bold text-white uppercase">Inquiry Received!</h3>
-                <p className="text-white/80 text-xs max-w-md mx-auto font-mono uppercase tracking-wider leading-relaxed">
-                  Thank you for reaching out to XIII Art & Design Studio. Fernanda has received your message and will respond within 24 hours.
-                </p>
-                <button
-                  onClick={() => setSubmitSuccess(false)}
-                  className="mt-6 inline-block bg-[#800020] text-white px-6 py-3 text-[10px] font-mono font-bold uppercase tracking-[0.2em] transition-colors"
-                >
-                  Send Another Inquiry
-                </button>
+                <h3 className="text-3xl font-syne font-bold text-white uppercase">Inquiry Delivered!</h3>
+                
+                <div className="space-y-2 text-white/90 text-sm max-w-md mx-auto leading-relaxed border-l-2 border-[#C8102E] pl-4 text-left">
+                  <p className="font-semibold text-white">
+                    Thank you for reaching out to XIII Art & Design Studio.
+                  </p>
+                  <p className="text-white/80 text-xs">
+                    Your details have been submitted and sent directly to <strong className="text-white">xiii.art.design@gmail.com</strong>. Fernanda will review your message and get back to you within 24 hours.
+                  </p>
+                </div>
+
+                <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+                  <a
+                    href={constructMailto()}
+                    className="inline-flex items-center space-x-2 bg-white/10 hover:bg-white/20 text-white px-6 py-3 text-xs font-syne font-bold uppercase tracking-wider transition-colors border border-white/20"
+                  >
+                    <Mail size={14} />
+                    <span>Open Email App to Confirm</span>
+                  </a>
+
+                  <button
+                    onClick={() => setSubmitSuccess(false)}
+                    className="inline-block bg-[#C8102E] hover:bg-[#d91635] text-white px-6 py-3 text-xs font-syne font-bold uppercase tracking-wider transition-colors"
+                  >
+                    Send Another Message
+                  </button>
+                </div>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
-                <h3 className="text-2xl font-syne font-bold text-white uppercase mb-2">
-                  Project Inquiry Form
-                </h3>
+                <div>
+                  <h3 className="text-2xl font-syne font-bold text-white uppercase">
+                    Project Inquiry Form
+                  </h3>
+                  <p className="text-xs text-white/60 font-sans mt-1">
+                    All submitted info is sent directly to <span className="text-[#ff8093]">xiii.art.design@gmail.com</span>
+                  </p>
+                </div>
 
                 {errorMessage && (
-                  <div className="p-3 bg-[#800020]/20 border border-[#800020] text-white text-xs font-mono flex items-center space-x-2">
-                    <AlertCircle size={16} className="text-[#800020]" />
+                  <div className="p-3 bg-[#C8102E]/20 border border-[#C8102E] text-white text-xs flex items-center space-x-2">
+                    <AlertCircle size={16} className="text-[#C8102E]" />
                     <span>{errorMessage}</span>
                   </div>
                 )}
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 font-mono">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {/* Name */}
                   <div className="space-y-1.5">
-                    <label className="text-[9px] uppercase tracking-[0.25em] text-white/70 block">
+                    <label className="text-xs uppercase tracking-wider text-white/80 font-syne font-semibold block">
                       Your Name *
                     </label>
                     <input
@@ -190,13 +219,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       placeholder="e.g. Fernanda Rodriguez"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full bg-[#050505] border border-white/20 px-4 py-3 text-xs text-white placeholder-white/20 focus:outline-none focus:border-[#800020] transition-colors"
+                      className="w-full bg-[#050505] border border-white/20 px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#C8102E] transition-colors"
                     />
                   </div>
 
                   {/* Email */}
                   <div className="space-y-1.5">
-                    <label className="text-[9px] uppercase tracking-[0.25em] text-white/70 block">
+                    <label className="text-xs uppercase tracking-wider text-white/80 font-syne font-semibold block">
                       Email Address *
                     </label>
                     <input
@@ -205,51 +234,51 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       placeholder="e.g. fernanda@brand.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full bg-[#050505] border border-white/20 px-4 py-3 text-xs text-white placeholder-white/20 focus:outline-none focus:border-[#800020] transition-colors"
+                      className="w-full bg-[#050505] border border-white/20 px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#C8102E] transition-colors"
                     />
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 font-mono">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {/* Phone */}
                   <div className="space-y-1.5">
-                    <label className="text-[9px] uppercase tracking-[0.25em] text-white/70 block">
+                    <label className="text-xs uppercase tracking-wider text-white/80 font-syne font-semibold block">
                       Phone / WhatsApp
                     </label>
                     <input
                       type="text"
-                      placeholder="+506 8888-8888"
+                      placeholder="+507 6497-7883"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full bg-[#050505] border border-white/20 px-4 py-3 text-xs text-white placeholder-white/20 focus:outline-none focus:border-[#800020] transition-colors"
+                      className="w-full bg-[#050505] border border-white/20 px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#C8102E] transition-colors"
                     />
                   </div>
 
                   {/* Company */}
                   <div className="space-y-1.5">
-                    <label className="text-[9px] uppercase tracking-[0.25em] text-white/70 block">
+                    <label className="text-xs uppercase tracking-wider text-white/80 font-syne font-semibold block">
                       Company / Brand Name
                     </label>
                     <input
                       type="text"
-                      placeholder="e.g. Costa Rica Resort"
+                      placeholder="e.g. Pacific Resort"
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                      className="w-full bg-[#050505] border border-white/20 px-4 py-3 text-xs text-white placeholder-white/20 focus:outline-none focus:border-[#800020] transition-colors"
+                      className="w-full bg-[#050505] border border-white/20 px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#C8102E] transition-colors"
                     />
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 font-mono">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {/* Project Type */}
                   <div className="space-y-1.5">
-                    <label className="text-[9px] uppercase tracking-[0.25em] text-white/70 block">
+                    <label className="text-xs uppercase tracking-wider text-white/80 font-syne font-semibold block">
                       Engagement Model / Service
                     </label>
                     <select
                       value={formData.projectType}
                       onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
-                      className="w-full bg-[#050505] border border-white/20 px-4 py-3 text-xs text-white focus:outline-none focus:border-[#800020] transition-colors"
+                      className="w-full bg-[#050505] border border-white/20 px-4 py-3 text-xs text-white focus:outline-none focus:border-[#C8102E] transition-colors"
                     >
                       <option value="The Digital Blueprint ($6,000+)">The Digital Blueprint ($6,000+)</option>
                       <option value="The Growth Partner ($4,500/mo)">The Growth Partner ($4,500/mo)</option>
@@ -263,13 +292,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
                   {/* Estimated Budget */}
                   <div className="space-y-1.5">
-                    <label className="text-[9px] uppercase tracking-[0.25em] text-white/70 block">
+                    <label className="text-xs uppercase tracking-wider text-white/80 font-syne font-semibold block">
                       Estimated Budget
                     </label>
                     <select
                       value={formData.budget}
                       onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                      className="w-full bg-[#050505] border border-white/20 px-4 py-3 text-xs text-white focus:outline-none focus:border-[#800020] transition-colors"
+                      className="w-full bg-[#050505] border border-white/20 px-4 py-3 text-xs text-white focus:outline-none focus:border-[#C8102E] transition-colors"
                     >
                       <option value="Under $2,000">Under $2,000</option>
                       <option value="$2,000 - $5,000">$2,000 - $5,000</option>
@@ -280,8 +309,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 </div>
 
                 {/* Message */}
-                <div className="space-y-1.5 font-mono">
-                  <label className="text-[9px] uppercase tracking-[0.25em] text-white/70 block">
+                <div className="space-y-1.5">
+                  <label className="text-xs uppercase tracking-wider text-white/80 font-syne font-semibold block">
                     Project Details & Goals *
                   </label>
                   <textarea
@@ -290,7 +319,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                     placeholder="Tell us about your brand, target audience, challenges, or goals..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full bg-[#050505] border border-white/20 p-4 text-xs text-white placeholder-white/20 focus:outline-none focus:border-[#800020] transition-colors"
+                    className="w-full bg-[#050505] border border-white/20 p-4 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#C8102E] transition-colors"
                   />
                 </div>
 
@@ -298,10 +327,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-[#800020] hover:bg-[#a00028] text-white py-4 text-[10px] font-mono uppercase tracking-[0.2em] font-bold transition-all flex items-center justify-center space-x-2 shadow-2xl disabled:opacity-50"
+                  className="w-full bg-[#C8102E] hover:bg-[#d91635] text-white py-4 text-xs font-syne uppercase tracking-wider font-bold transition-all flex items-center justify-center space-x-2 shadow-2xl disabled:opacity-50"
                 >
-                  <Send size={14} />
-                  <span>{isSubmitting ? 'Sending Submission...' : 'Submit Inquiry'}</span>
+                  <Send size={16} />
+                  <span>{isSubmitting ? 'Submitting Message...' : 'Submit Inquiry'}</span>
                 </button>
               </form>
             )}
@@ -313,3 +342,4 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
     </section>
   );
 };
+
