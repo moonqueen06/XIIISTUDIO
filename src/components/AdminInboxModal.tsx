@@ -88,9 +88,9 @@ export const AdminInboxModal: React.FC<AdminInboxModalProps> = ({ isOpen, onClos
           {/* Header */}
           <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
             <div className="flex items-center space-x-2">
-              <Inbox size={20} className="text-[#800020]" />
+              <Inbox size={20} className="text-[#C8102E]" />
               <h3 className="font-syne text-xl font-bold uppercase tracking-wider text-white">Studio Inbox</h3>
-              <span className="text-[10px] font-mono bg-[#800020] px-2 py-0.5 font-bold text-white">
+              <span className="text-[10px] font-mono bg-[#C8102E] px-2 py-0.5 font-bold text-white">
                 {contacts.length}
               </span>
             </div>
@@ -112,7 +112,7 @@ export const AdminInboxModal: React.FC<AdminInboxModalProps> = ({ isOpen, onClos
               </button>
               <button
                 onClick={onClose}
-                className="p-2 bg-[#800020] hover:bg-[#a00028] text-white transition-colors"
+                className="p-2 bg-[#C8102E] hover:bg-[#d91635] text-white transition-colors"
               >
                 <X size={18} />
               </button>
@@ -137,7 +137,7 @@ export const AdminInboxModal: React.FC<AdminInboxModalProps> = ({ isOpen, onClos
                   onClick={() => setSelectedInquiry(inquiry)}
                   className={`p-4 border transition-all cursor-pointer ${
                     selectedInquiry?.id === inquiry.id
-                      ? 'bg-[#800020]/20 border-[#800020] shadow-xl'
+                      ? 'bg-[#C8102E]/20 border-[#C8102E] shadow-xl'
                       : inquiry.read
                       ? 'bg-[#050505] border-white/10 opacity-60'
                       : 'bg-[#050505] border-white/20'
@@ -213,7 +213,7 @@ export const AdminInboxModal: React.FC<AdminInboxModalProps> = ({ isOpen, onClos
             <div className="flex justify-end space-x-2 pt-1">
               <a
                 href={`mailto:${selectedInquiry.email}?subject=RE: XIII Studio Project Inquiry`}
-                className="bg-[#800020] hover:bg-[#a00028] text-white px-4 py-2 text-[9px] font-mono font-bold uppercase tracking-[0.2em] transition-all"
+                className="bg-[#C8102E] hover:bg-[#d91635] text-white px-4 py-2 text-[9px] font-mono font-bold uppercase tracking-[0.2em] transition-all"
               >
                 Reply via Email
               </a>

@@ -50,8 +50,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
         body: JSON.stringify(formData),
       }).catch(() => null);
 
-      // 2. Submit to Formspree / Web3Forms for direct email delivery to xiii.art.design@gmail.com
-      await fetch('https://formspree.io/f/xiii.art.design@gmail.com', {
+      // 2. Submit to Formspree for instant email notification
+      await fetch('https://formspree.io/f/xvzewpdr', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({

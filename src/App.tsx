@@ -10,6 +10,7 @@ import { PricingTable } from './components/PricingTable';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { MobileCinematicView } from './components/MobileCinematicView';
+import { AdminInboxModal } from './components/AdminInboxModal';
 import { PortfolioItem } from './types';
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
   const [prefilledScope, setPrefilledScope] = useState('');
   const [isSoundEnabled, setIsSoundEnabled] = useState(true);
   const [isMobileCinematic, setIsMobileCinematic] = useState(false);
+  const [isAdminInboxOpen, setIsAdminInboxOpen] = useState(false);
 
   const handleNavigate = (sectionId: string) => {
     setActiveSection(sectionId);
@@ -37,7 +39,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-[#800020] selection:text-white">
+    <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-[#C8102E] selection:text-white">
       {/* Sticky Header */}
       <Header
         activeSection={activeSection}
@@ -46,6 +48,7 @@ export default function App() {
         onToggleSound={() => setIsSoundEnabled(!isSoundEnabled)}
         isMobileCinematic={isMobileCinematic}
         onToggleMobileMode={() => setIsMobileCinematic(!isMobileCinematic)}
+        onOpenInbox={() => setIsAdminInboxOpen(true)}
       />
 
       {/* MOBILE CINEMATIC GALLERY MODE */}
@@ -102,6 +105,13 @@ export default function App() {
       {/* Footer */}
       <Footer
         onNavigate={handleNavigate}
+        onOpenInbox={() => setIsAdminInboxOpen(true)}
+      />
+
+      {/* Admin Studio Inbox Modal */}
+      <AdminInboxModal
+        isOpen={isAdminInboxOpen}
+        onClose={() => setIsAdminInboxOpen(false)}
       />
     </div>
   );

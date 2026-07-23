@@ -3,9 +3,10 @@ import { ArrowUp, Mail, Phone } from 'lucide-react';
 
 interface FooterProps {
   onNavigate: (sectionId: string) => void;
+  onOpenInbox?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
+export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInbox }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -110,7 +111,16 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs uppercase tracking-wider text-white/60 space-y-4 sm:space-y-0 font-syne font-semibold">
           <p>© {new Date().getFullYear()} XIII Art & Design Studio. All Rights Reserved.</p>
           
-          <div className="flex items-center space-x-6">
+          <div className="flex flex-wrap items-center gap-6">
+            {onOpenInbox && (
+              <button
+                onClick={onOpenInbox}
+                className="text-xs text-[#ff8093] hover:text-white uppercase tracking-widest font-mono font-bold flex items-center space-x-1.5 border-b border-[#C8102E]/40 pb-0.5"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-[#C8102E]" />
+                <span>Studio Inbox</span>
+              </button>
+            )}
             <span>Based in Bocas del Toro • Moving Worldwide</span>
             <button
               onClick={scrollToTop}

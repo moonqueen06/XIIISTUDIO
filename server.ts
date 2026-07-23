@@ -110,6 +110,16 @@ async function startServer() {
 
     console.log("📥 New XIII Studio Contact Form Submission Received:", newInquiry.name, newInquiry.email);
 
+    // Forward asynchronously to Formspree for immediate email delivery
+    fetch("https://formspree.io/f/xvzewpdr", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({
+        ...newInquiry,
+        _subject: `New XIII Studio Project Inquiry from ${newInquiry.name}`,
+      }),
+    }).catch((err) => console.error("Formspree forward error:", err));
+
     return res.status(201).json({
       success: true,
       message: "Inquiry received successfully! Fernanda will get back to you within 24 hours.",

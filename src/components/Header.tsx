@@ -9,6 +9,7 @@ interface HeaderProps {
   onToggleSound: () => void;
   isMobileCinematic: boolean;
   onToggleMobileMode: () => void;
+  onOpenInbox?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -18,6 +19,7 @@ export const Header: React.FC<HeaderProps> = ({
   onToggleSound,
   isMobileCinematic,
   onToggleMobileMode,
+  onOpenInbox,
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -96,7 +98,19 @@ export const Header: React.FC<HeaderProps> = ({
         </nav>
 
         {/* RIGHT ACTION BUTTONS */}
-        <div className="hidden sm:flex items-center space-x-4">
+        <div className="hidden sm:flex items-center space-x-3">
+          {/* Studio Inbox Lead Dashboard Button */}
+          {onOpenInbox && (
+            <button
+              onClick={onOpenInbox}
+              title="View Studio Form Submissions & Leads"
+              className="px-3 py-1.5 border border-white/20 hover:border-[#C8102E] text-white/80 hover:text-white text-[10px] font-mono uppercase tracking-wider transition-colors flex items-center space-x-1.5"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-[#C8102E] animate-pulse" />
+              <span>Studio Inbox</span>
+            </button>
+          )}
+
           {/* Sound Toggle */}
           <button
             onClick={() => {
