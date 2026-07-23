@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Phone, Send, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Mail, Phone, Send, CheckCircle2, AlertCircle, ArrowUpRight } from 'lucide-react';
 import { ContactInquiry } from '../types';
 
 interface ContactSectionProps {
@@ -95,7 +95,28 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
     <section id="contact" className="py-24 bg-[#050505] text-white relative overflow-hidden border-b border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        {/* CRIMSON CTA BANNER (Reference Image 2 Inspired) */}
+        <div className="bg-[#C8102E] text-white p-8 sm:p-14 mb-16 flex flex-col lg:flex-row lg:items-center justify-between gap-8 border border-white/20 shadow-2xl">
+          <div className="space-y-2">
+            <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-white/80 font-bold">
+              START YOUR EVOLUTION
+            </span>
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-syne font-black uppercase tracking-tight leading-none text-white">
+              LET'S CREATE SOMETHING <br className="hidden sm:inline" />
+              GREAT TOGETHER<span className="text-black">.</span>
+            </h2>
+          </div>
+          
+          <a
+            href="mailto:xiii.art.design@gmail.com"
+            className="w-20 h-20 sm:w-24 sm:h-24 bg-white text-black hover:bg-black hover:text-white transition-all rounded-full flex items-center justify-center shrink-0 shadow-2xl self-start lg:self-auto group"
+            title="Email Directly"
+          >
+            <ArrowUpRight size={36} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+          </a>
+        </div>
+
+        <div id="contact-form" className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
           {/* LEFT: Contact Details & Brand Pitch */}
           <div className="lg:col-span-5 space-y-8">

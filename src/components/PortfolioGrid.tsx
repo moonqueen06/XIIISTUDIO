@@ -63,19 +63,24 @@ export const PortfolioGrid: React.FC<PortfolioGridProps> = ({ onSelectProject })
           ))}
         </div>
 
-        {/* Coming Soon Section - No Images / Screenshots */}
-        <div className="bg-[#0a0a0a] border border-white/10 p-8 sm:p-16 text-center space-y-6 relative overflow-hidden shadow-2xl">
+        {/* High-End Editorial Coming Soon Showcase */}
+        <div className="bg-[#0a0a0a] border border-white/10 p-8 sm:p-16 text-center space-y-8 relative overflow-hidden shadow-2xl">
+          {/* Subtle Background Accent */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-[#C8102E]/10 rounded-full blur-3xl pointer-events-none" />
+
           <div className="inline-flex items-center space-x-2 bg-[#C8102E] text-white px-4 py-1.5 text-[10px] font-mono font-bold uppercase tracking-[0.25em]">
             <span>Archive Updating</span>
           </div>
 
-          <h3 className="text-4xl sm:text-7xl font-syne font-black text-white uppercase tracking-tighter leading-none">
-            COMING SOON<span className="text-[#C8102E]">!</span>
-          </h3>
-
-          <p className="text-white/70 text-xs sm:text-sm font-mono uppercase tracking-widest max-w-xl mx-auto leading-relaxed">
-            Our selected case studies, brand architecture breakdowns, and client web platforms are currently being curated for our upcoming portfolio archive.
-          </p>
+          <div className="space-y-4">
+            <h3 className="text-5xl sm:text-7xl lg:text-8xl font-syne font-black text-white uppercase tracking-tighter leading-none">
+              SELECTED WORKS <br />
+              <span className="text-[#C8102E]">COMING SOON...</span>
+            </h3>
+            <p className="text-white/70 text-xs sm:text-sm font-mono uppercase tracking-widest max-w-xl mx-auto leading-relaxed pt-2">
+              Our curated portfolio of brand identity systems, custom web engineering, fine art photography, and operational CRM workflows is currently undergoing a complete archive refresh.
+            </p>
+          </div>
 
           <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
@@ -85,7 +90,36 @@ export const PortfolioGrid: React.FC<PortfolioGridProps> = ({ onSelectProject })
               <span>Request Private Portfolio Deck</span>
               <ArrowRight size={14} />
             </a>
+
+            <a
+              href="#contact"
+              className="border border-white/20 hover:border-white text-white px-8 py-4 text-xs font-syne uppercase tracking-wider font-bold transition-all flex items-center space-x-2"
+            >
+              <span>Direct Project Inquiry</span>
+            </a>
           </div>
+
+          {/* 3 Pillar Summary Cards */}
+          <div className="pt-12 grid grid-cols-1 md:grid-cols-3 gap-6 text-left border-t border-white/10 mt-12 font-syne">
+            <div className="p-6 bg-[#050505] border border-white/10 space-y-2">
+              <span className="text-[10px] font-mono text-[#ff8093] uppercase tracking-widest font-bold">PILLAR 01</span>
+              <h4 className="text-lg font-black uppercase text-white">Brand Architecture</h4>
+              <p className="text-xs font-sans text-white/60 leading-relaxed">Identity guidelines, visual storytelling, and luxury collateral for forward-thinking brands.</p>
+            </div>
+
+            <div className="p-6 bg-[#050505] border border-white/10 space-y-2">
+              <span className="text-[10px] font-mono text-[#ff8093] uppercase tracking-widest font-bold">PILLAR 02</span>
+              <h4 className="text-lg font-black uppercase text-white">Digital Web Systems</h4>
+              <p className="text-xs font-sans text-white/60 leading-relaxed">High-conversion web platforms, custom booking engines, and responsive digital experiences.</p>
+            </div>
+
+            <div className="p-6 bg-[#050505] border border-white/10 space-y-2">
+              <span className="text-[10px] font-mono text-[#ff8093] uppercase tracking-widest font-bold">PILLAR 03</span>
+              <h4 className="text-lg font-black uppercase text-white">Operational Strategy</h4>
+              <p className="text-xs font-sans text-white/60 leading-relaxed">CRM integrations, automated lead funnels, and streamlined administrative workflows.</p>
+            </div>
+          </div>
+
         </div>
 
       </div>

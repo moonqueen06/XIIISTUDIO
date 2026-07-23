@@ -3,8 +3,14 @@ import { PortfolioItem } from '../types';
 import heroEditorial from '../assets/images/hero_xiii_editorial_1784764871391.jpg';
 import hospitalityImg from '../assets/images/portfolio_hospitality_1784764879793.jpg';
 import brandingImg from '../assets/images/portfolio_branding_1784764888030.jpg';
+import heroPortraitGen from '../assets/images/hero_editorial_portrait_1784773118653.jpg';
+import fernandaPortraitGen from '../assets/images/fernanda_studio_portrait_1784773135018.jpg';
+
+import fernandaBwPortrait from '../assets/images/fernanda_bw_portrait_1784813730107.jpg';
 
 export const HERO_IMAGE = heroEditorial;
+export const HERO_PORTRAIT_IMG = fernandaBwPortrait;
+export const FERNANDA_PORTRAIT_IMG = fernandaBwPortrait;
 
 export const PORTFOLIO_ITEMS: PortfolioItem[] = [
   {

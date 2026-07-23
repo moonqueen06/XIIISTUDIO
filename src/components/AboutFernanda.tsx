@@ -1,99 +1,185 @@
-import React from 'react';
-import { GraduationCap, MapPin, Sparkles, Compass } from 'lucide-react';
+import React, { useState } from 'react';
+import { Download, ArrowUpRight, Cpu, Palette, Code2, Sparkles, Layers, PenTool, CheckCircle2 } from 'lucide-react';
 
 export const AboutFernanda: React.FC = () => {
+  const [activeCategory, setActiveCategory] = useState<'all' | 'adobe' | 'systems' | 'artistry' | 'media'>('all');
+
+  const capabilities = [
+    {
+      category: 'adobe',
+      categoryLabel: 'ADOBE CREATIVE SUITE',
+      mastery: '95% MASTERY',
+      skills: ['Photoshop', 'Illustrator', 'InDesign', 'Premiere Pro', 'After Effects'],
+      description: 'Master-level visual editing, vector graphics, print production, motion design, and video compositing.'
+    },
+    {
+      category: 'systems',
+      categoryLabel: 'WEB, CODE & SYSTEMS',
+      mastery: '100% MASTERY',
+      skills: ['Custom Web Apps', 'Figma (UI/UX)', 'HTML / CSS / JavaScript', 'WordPress & Wix', 'Booking Systems', 'CRM & API Integrations', 'Google Tools Suite'],
+      description: 'Full-stack design and deployment of high-conversion digital platforms, booking engines, and CRM automations.'
+    },
+    {
+      category: 'artistry',
+      categoryLabel: 'FINE ARTISTRY & CRAFT',
+      mastery: 'EXPERTISE',
+      skills: ['Fine Art Painting', 'Printmaking', 'Product Mockups', 'Woodworking', 'Couture & Apparel Design'],
+      description: 'Tactile physical craftsmanship spanning fine art mediums, architectural woodwork, and custom fashion design.'
+    },
+    {
+      category: 'media',
+      categoryLabel: 'MEDIA, STORY & MARKETING',
+      mastery: 'STRATEGIC',
+      skills: ['Concept Photography', 'Lighting Design', 'Video Editing', 'Scriptwriting', 'Creative Copywriting', 'Marketing Strategy'],
+      description: 'End-to-end editorial production, campaign narrative development, and revenue-focused brand marketing.'
+    }
+  ];
+
+  const filteredCapabilities = activeCategory === 'all' 
+    ? capabilities 
+    : capabilities.filter(c => c.category === activeCategory);
+
   return (
-    <section id="about" className="py-24 bg-[#050505] text-white relative overflow-hidden border-b border-white/10">
+    <section id="about" className="py-20 md:py-28 bg-white text-black relative overflow-hidden border-b border-black/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        {/* SECTION EYEBROW */}
+        <div className="flex items-center space-x-3 mb-12">
+          <div className="w-8 h-[2px] bg-[#C8102E]" />
+          <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-[#C8102E] font-bold">
+            02 / Studio Founder & Multidisciplinary Lead
+          </span>
+        </div>
+
+        {/* TOP EDITORIAL STATEMENT + NARRATIVE */}
+        <div className="max-w-4xl space-y-6 mb-12">
+          <h2 className="text-4xl sm:text-6xl font-syne font-black text-black tracking-tight uppercase leading-[1.05]">
+            DESIGN IS SOLVING PROBLEMS WITH EMPATHY AND CREATIVITY<span className="text-[#C8102E]">.</span>
+          </h2>
+
+          <p className="text-base sm:text-lg font-sans text-black/80 leading-relaxed border-l-2 border-[#C8102E] pl-4">
+            I’m Fernanda—founder & creative director of XIII Studio. Based in <strong className="text-black">Bocas del Toro</strong> and moving worldwide, I bridge high-end brands with full-stack web development, software integrations, and growth marketing.
+          </p>
+
+          <div className="flex flex-wrap items-center gap-4 pt-2">
+            <a
+              href="#contact"
+              className="bg-[#C8102E] hover:bg-black text-white px-6 py-3.5 text-xs font-syne font-bold uppercase tracking-wider transition-all shadow-xl inline-flex items-center space-x-2"
+            >
+              <span>Initiate Dialogue</span>
+              <ArrowUpRight size={14} />
+            </a>
+
+            <a
+              href="#contact"
+              className="border border-black/20 hover:border-[#C8102E] text-black hover:text-[#C8102E] px-5 py-3.5 text-xs font-syne font-bold uppercase tracking-wider transition-all inline-flex items-center space-x-2"
+            >
+              <Download size={14} />
+              <span>Capabilities Deck</span>
+            </a>
+          </div>
+        </div>
+
+        {/* MULTIDISCIPLINARY CAPABILITIES DASHBOARD */}
+        <div className="bg-[#f8f8f8] border border-black/10 p-6 sm:p-10 shadow-xl space-y-8">
           
-          {/* LEFT: Credentials & Key Focus (Text-driven block) */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-[2px] bg-[#C8102E]" />
-              <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-[#C8102E] font-bold">
-                02 / Studio Founder & Lead
+          {/* Dashboard Header & Category Filter Buttons */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-black/10 pb-6">
+            <div>
+              <span className="text-[10px] font-mono text-[#C8102E] font-bold uppercase tracking-widest block mb-1">
+                STUDIO KNOWLEDGE & SOFTWARE MATRIX
               </span>
+              <h3 className="text-2xl sm:text-3xl font-syne font-black uppercase text-black tracking-tight">
+                CAPABILITIES DASHBOARD<span className="text-[#C8102E]">.</span>
+              </h3>
             </div>
 
-            <div className="bg-[#0a0a0a] border border-white/10 p-8 space-y-6 shadow-2xl">
-              <div className="border-b border-white/10 pb-4">
-                <p className="text-[9px] font-mono text-[#ff8093] uppercase tracking-[0.25em]">
-                  Studio Lead Profile
-                </p>
-                <p className="font-syne text-3xl font-black uppercase text-white tracking-tight mt-1">
-                  Fernanda<span className="text-[#C8102E]">.</span>
-                </p>
-                <p className="text-xs font-serif italic text-white/70 mt-1">
-                  Multidisciplinary Artist & Digital Strategist
-                </p>
-              </div>
-
-              {/* Quick Badges */}
-              <div className="space-y-4 font-mono">
-                <div className="bg-[#050505] border border-white/10 p-4 flex items-start space-x-3">
-                  <MapPin size={18} className="text-[#C8102E] shrink-0 mt-0.5" />
-                  <div>
-                    <p className="text-[10px] uppercase font-bold text-white tracking-wider">Based in Bocas del Toro</p>
-                    <p className="text-[9px] text-[#ff8093] uppercase tracking-widest mt-0.5 font-bold">Moving Worldwide</p>
-                  </div>
-                </div>
-
-                <div className="bg-[#050505] border border-white/10 p-4 flex items-start space-x-3">
-                  <GraduationCap size={18} className="text-[#C8102E] shrink-0 mt-0.5" />
-                  <div>
-                    <p className="text-[10px] uppercase font-bold text-white tracking-wider">UWC Maastricht & Ringling</p>
-                    <p className="text-[9px] text-white/50 uppercase tracking-widest mt-0.5">Visual Studies & Fine Arts</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-4 bg-[#C8102E]/20 border border-[#C8102E] text-xs font-mono text-white/90 space-y-1">
-                <p className="text-[9px] uppercase tracking-[0.2em] text-[#ff8093] font-bold">Specialized Operational Field</p>
-                <p className="text-xs">Tourism, Hospitality, Real Estate & E-Commerce Systems</p>
-              </div>
+            {/* Filter Pills */}
+            <div className="flex flex-wrap gap-2 font-syne text-[11px] font-bold uppercase">
+              <button
+                onClick={() => setActiveCategory('all')}
+                className={`px-3.5 py-1.5 transition-all border ${
+                  activeCategory === 'all'
+                    ? 'bg-black text-white border-black'
+                    : 'bg-white text-black/70 border-black/10 hover:border-black'
+                }`}
+              >
+                All Domains
+              </button>
+              <button
+                onClick={() => setActiveCategory('adobe')}
+                className={`px-3.5 py-1.5 transition-all border ${
+                  activeCategory === 'adobe'
+                    ? 'bg-[#C8102E] text-white border-[#C8102E]'
+                    : 'bg-white text-black/70 border-black/10 hover:border-black'
+                }`}
+              >
+                Adobe Suite
+              </button>
+              <button
+                onClick={() => setActiveCategory('systems')}
+                className={`px-3.5 py-1.5 transition-all border ${
+                  activeCategory === 'systems'
+                    ? 'bg-black text-white border-black'
+                    : 'bg-white text-black/70 border-black/10 hover:border-black'
+                }`}
+              >
+                Code & Systems
+              </button>
+              <button
+                onClick={() => setActiveCategory('artistry')}
+                className={`px-3.5 py-1.5 transition-all border ${
+                  activeCategory === 'artistry'
+                    ? 'bg-black text-white border-black'
+                    : 'bg-white text-black/70 border-black/10 hover:border-black'
+                }`}
+              >
+                Fine Arts & Couture
+              </button>
+              <button
+                onClick={() => setActiveCategory('media')}
+                className={`px-3.5 py-1.5 transition-all border ${
+                  activeCategory === 'media'
+                    ? 'bg-black text-white border-black'
+                    : 'bg-white text-black/70 border-black/10 hover:border-black'
+                }`}
+              >
+                Media & Strategy
+              </button>
             </div>
           </div>
 
-          {/* RIGHT: Story Narrative ("HI, I'M FERNANDA") */}
-          <div className="lg:col-span-7 space-y-8">
-            <div>
-              <h2 className="text-4xl sm:text-6xl font-syne font-black text-white tracking-tighter uppercase leading-tight">
-                Hi, I’m Fernanda<span className="text-[#C8102E]">.</span>
-              </h2>
+          {/* Capabilities Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {filteredCapabilities.map((item, idx) => (
+              <div
+                key={idx}
+                className="bg-white border border-black/10 p-6 sm:p-8 space-y-4 hover:border-[#C8102E] transition-all shadow-sm group"
+              >
+                <div className="border-b border-black/10 pb-3">
+                  <span className="text-[11px] font-mono text-[#C8102E] font-bold uppercase tracking-wider block">
+                    {item.categoryLabel}
+                  </span>
+                </div>
 
-              <p className="text-xl sm:text-2xl font-serif text-[#ff8093] italic font-light mt-2">
-                "My studio is wherever you are."
-              </p>
-            </div>
+                <p className="text-xs font-sans text-black/70 leading-relaxed">
+                  {item.description}
+                </p>
 
-            <div className="space-y-4 text-white/80 font-sans text-sm sm:text-base leading-relaxed border-l-2 border-[#C8102E] pl-6 py-2">
-              <p>
-                Based in <strong className="text-white">Bocas del Toro</strong> and moving worldwide, my journey is a fusion of fine art and structured operational strategy. My formal introduction to the arts started with an IB at <strong className="text-white">UWC Maastricht</strong> in the Netherlands, followed by visual studies at <strong className="text-white">Ringling College of Art and Design</strong>.
-              </p>
-
-              <p>
-                While I have a deep love for fine arts, photography, and digital direction, my mission is applying creative clarity to real-world business growth.
-              </p>
-
-              <p>
-                I pair artistic foundation with tech systems—mastering web engineering, marketing architecture, and CRM creation. <strong className="text-white underline decoration-[#C8102E] underline-offset-4">I don’t just design beautiful brands—I build the backend workflows to make them operate effortlessly anywhere on earth.</strong>
-              </p>
-            </div>
-
-            {/* Highlights Bar */}
-            <div className="pt-6 border-t border-white/10 grid grid-cols-1 sm:grid-cols-2 gap-6 font-mono">
-              <div className="space-y-1 bg-[#0a0a0a] p-4 border border-white/10">
-                <p className="text-[9px] uppercase tracking-[0.25em] text-[#C8102E] font-bold">Core Fine Arts</p>
-                <p className="text-xs font-semibold text-white">Photography, Visual Direction & Brand Systems</p>
+                {/* Skill Badges */}
+                <div className="flex flex-wrap gap-2 pt-2">
+                  {item.skills.map((skill, sIdx) => (
+                    <span
+                      key={sIdx}
+                      className="inline-flex items-center space-x-1.5 bg-[#f2f2f2] group-hover:bg-[#C8102E]/10 group-hover:text-[#C8102E] text-black px-3 py-1 border border-black/10 text-xs font-syne font-bold uppercase tracking-wider transition-colors"
+                    >
+                      <CheckCircle2 size={12} className="text-[#C8102E] shrink-0" />
+                      <span>{skill}</span>
+                    </span>
+                  ))}
+                </div>
               </div>
-              <div className="space-y-1 bg-[#0a0a0a] p-4 border border-white/10">
-                <p className="text-[9px] uppercase tracking-[0.25em] text-[#C8102E] font-bold">Core Systems</p>
-                <p className="text-xs font-semibold text-white">Web Engineering, CRM & Operational Workflows</p>
-              </div>
-            </div>
-
+            ))}
           </div>
 
         </div>
@@ -102,3 +188,4 @@ export const AboutFernanda: React.FC = () => {
     </section>
   );
 };
+
