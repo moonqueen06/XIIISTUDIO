@@ -1,0 +1,189 @@
+import React, { useState } from 'react';
+import { PORTFOLIO_ITEMS } from '../data/portfolioData';
+import { PortfolioItem, PortfolioCategory } from '../types';
+import { ExternalLink, Eye, X, CheckCircle2, ArrowRight } from 'lucide-react';
+
+interface PortfolioGridProps {
+  onSelectProject: (project: PortfolioItem) => void;
+}
+
+export const PortfolioGrid: React.FC<PortfolioGridProps> = ({ onSelectProject }) => {
+  const [activeCategory, setActiveCategory] = useState<PortfolioCategory>('all');
+  const [lightboxItem, setLightboxItem] = useState<PortfolioItem | null>(null);
+
+  const categories: { id: PortfolioCategory; label: string }[] = [
+    { id: 'all', label: 'All Works' },
+    { id: 'brand-identity', label: 'Brand Identity' },
+    { id: 'web-app', label: 'Web Systems' },
+    { id: 'photography', label: 'Photography & Art' },
+    { id: 'operations', label: 'Operations & CRM' },
+  ];
+
+  const filteredItems = activeCategory === 'all'
+    ? PORTFOLIO_ITEMS
+    : PORTFOLIO_ITEMS.filter((item) => item.category === activeCategory);
+
+  return (
+    <section id="portfolio" className="py-24 bg-[#050505] text-white relative border-b border-white/10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+          <div>
+            <div className="flex items-center space-x-3 mb-3">
+              <div className="w-8 h-[2px] bg-[#800020]" />
+              <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-[#800020] font-bold">
+                04 / Gallery Showcase
+              </span>
+            </div>
+            <h2 className="text-4xl sm:text-6xl font-syne font-black text-white tracking-tighter uppercase leading-none">
+              Selected Works<span className="text-[#800020]">.</span>
+            </h2>
+          </div>
+
+          <p className="text-white/60 text-xs font-mono uppercase tracking-widest max-w-md">
+            Branding systems, web engineering, fine art photography, and operational workflows for ambitious brands.
+          </p>
+        </div>
+
+        {/* Category Filters */}
+        <div className="flex items-center space-x-2 overflow-x-auto pb-4 mb-10 scrollbar-none border-b border-white/10">
+          {categories.map((cat) => (
+            <button
+              key={cat.id}
+              onClick={() => setActiveCategory(cat.id)}
+              className={`px-4 py-2 text-[10px] font-mono uppercase tracking-[0.2em] whitespace-nowrap transition-all ${
+                activeCategory === cat.id
+                  ? 'bg-[#800020] text-white font-bold shadow-lg'
+                  : 'bg-[#0a0a0a] text-white/60 hover:text-white border border-white/10'
+              }`}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Coming Soon Section - No Images / Screenshots */}
+        <div className="bg-[#0a0a0a] border border-white/10 p-8 sm:p-16 text-center space-y-6 relative overflow-hidden shadow-2xl">
+          <div className="inline-flex items-center space-x-2 bg-[#800020] text-white px-4 py-1.5 text-[10px] font-mono font-bold uppercase tracking-[0.25em]">
+            <span>Archive Updating</span>
+          </div>
+
+          <h3 className="text-4xl sm:text-7xl font-syne font-black text-white uppercase tracking-tighter leading-none">
+            COMING SOON<span className="text-[#800020]">!</span>
+          </h3>
+
+          <p className="text-white/70 text-xs sm:text-sm font-mono uppercase tracking-widest max-w-xl mx-auto leading-relaxed">
+            Our selected case studies, brand architecture breakdowns, and client web platforms are currently being curated for our upcoming portfolio archive.
+          </p>
+
+          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href="#contact"
+              className="bg-[#800020] hover:bg-[#a00028] text-white px-8 py-4 text-[10px] font-mono uppercase tracking-[0.25em] font-bold transition-all shadow-xl flex items-center space-x-2"
+            >
+              <span>Request Private Portfolio Deck</span>
+              <ArrowRight size={14} />
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      {/* LIGHTBOX CASE STUDY MODAL */}
+      {lightboxItem && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/90 backdrop-blur-xl animate-in fade-in duration-200">
+          <div className="bg-[#0a0a0a] text-white max-w-3xl w-full max-h-[90vh] overflow-y-auto border border-white/20 shadow-2xl relative p-6 sm:p-8">
+            
+            {/* Close Button */}
+            <button
+              onClick={() => setLightboxItem(null)}
+              className="absolute top-4 right-4 p-2.5 bg-white/10 hover:bg-[#800020] text-white transition-colors"
+            >
+              <X size={18} />
+            </button>
+
+            {/* Header Info */}
+            <div className="space-y-2 mb-6 border-b border-white/10 pb-4">
+              <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-[#800020] font-bold">
+                {lightboxItem.categoryLabel} • {lightboxItem.year}
+              </span>
+              <h3 className="text-3xl sm:text-4xl font-syne font-bold text-white uppercase">
+                {lightboxItem.title}
+              </h3>
+              <p className="text-xs font-mono text-white/50 uppercase tracking-widest">
+                Client: {lightboxItem.client}
+              </p>
+            </div>
+
+            {/* Image */}
+            <div className="overflow-hidden mb-6 border border-white/10 bg-black">
+              <img
+                src={lightboxItem.imageUrl}
+                alt={lightboxItem.title}
+                referrerPolicy="no-referrer"
+                className="w-full h-[300px] sm:h-[380px] object-cover"
+              />
+            </div>
+
+            {/* Summary */}
+            <p className="text-base font-serif text-white/90 leading-relaxed mb-6 italic border-l-2 border-[#800020] pl-4 py-1">
+              "{lightboxItem.summary}"
+            </p>
+
+            {/* Breakdown Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-white/10 mb-8 font-mono">
+              {lightboxItem.challenge && (
+                <div className="space-y-2">
+                  <h4 className="text-[10px] uppercase tracking-[0.25em] text-[#800020] font-bold">
+                    The Challenge
+                  </h4>
+                  <p className="text-xs text-white/80 leading-relaxed font-sans">
+                    {lightboxItem.challenge}
+                  </p>
+                </div>
+              )}
+
+              {lightboxItem.solution && (
+                <div className="space-y-2">
+                  <h4 className="text-[10px] uppercase tracking-[0.25em] text-white font-bold">
+                    The XIII Solution
+                  </h4>
+                  <p className="text-xs text-white/80 leading-relaxed font-sans">
+                    {lightboxItem.solution}
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {lightboxItem.impact && (
+              <div className="p-4 bg-[#800020]/20 border border-[#800020]/40 mb-8 flex items-start space-x-3 font-mono">
+                <CheckCircle2 size={16} className="text-[#800020] shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-[10px] font-bold text-white uppercase tracking-wider">Key Result & Impact</p>
+                  <p className="text-xs text-white/80 font-sans mt-0.5">{lightboxItem.impact}</p>
+                </div>
+              </div>
+            )}
+
+            {/* Action */}
+            <div className="flex justify-end space-x-3">
+              <button
+                onClick={() => {
+                  onSelectProject(lightboxItem);
+                  setLightboxItem(null);
+                }}
+                className="bg-[#800020] hover:bg-[#a00028] text-white px-6 py-3.5 text-[10px] font-mono uppercase tracking-[0.2em] font-bold transition-all flex items-center space-x-2 shadow-xl"
+              >
+                <span>Request Similar Project</span>
+                <ArrowRight size={14} />
+              </button>
+            </div>
+
+          </div>
+        </div>
+      )}
+
+    </section>
+  );
+};
